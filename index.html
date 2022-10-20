@@ -24,17 +24,24 @@
   </div>
     <div class="interface">
       <h3 id="gameUpdate">Hand Status</h3>
+      <div class="gameRow">
+      <div class="gameColumn">
       <h5>Dealer Hand: <span id="dealerHand"></span></h5>
-      <h5>Dealer Value: <span id="dealerValue"></span></h5><br />
+      <h5>Dealer Value: <span id="dealerValue"></span></h5>
+      </div>
+      <br />
+      <div class="gameColumn">
       <h5>Player Hand: <span id="playerHand"></span></h5>
       <h5>Player Value: <span id="playerValue"></span></h5>
+      <h5>Player Score: <span id="playerScore"></span></h5>
+      </div>
+      </div>
       <button id="HitBtn" onclick="hit()">Hit</button>
       <button id="StandBtn" onclick="stand()">Stand</button>
-      <!-- <button id="DoubleBtn">Double Down!</button> -->
-
-      <h5>Player Score: <span id="playerScore"></span></h5>
+      <button id="DoubleBtn" onclick="doubledown()">Double Down!</button>
+      <br /><br />
       <button id="NewHandBtn" onclick="newDeal()">New Hand</button>
-      <button id="ResetBtn" onclick="reset()">Reset</button>
+      <button id="ResetBtn" onclick="reset()">Reset Game</button>
     </div>
   </div>
 </main>

@@ -12,9 +12,25 @@ let rand;
 let playerAce = false;
 let dealerAce = false;
 let playerScore = 0;
-
+let double = false;
 
 function hit(){
+    playerHand.push(dealNewCard());
+    playerValue = calcPlayerHandValue();
+    document.getElementById("DoubleBtn").disabled = true;
+    document.getElementById("playerHand").innerHTML = playerHand;
+    document.getElementById("playerValue").innerHTML = playerValue;
+    if(checkBust(playerValue) == true){
+        document.getElementById("gameUpdate").innerHTML = ("You Bust!");
+        document.getElementById("HitBtn").disabled = true;
+        document.getElementById("StandBtn").disabled = true;
+        document.getElementById("DoubleBtn").disabled = true;
+        playerScore--;
+        document.getElementById("playerScore").innerHTML = playerScore;
+    }
+}
+
+function doubledown(){
     playerHand.push(dealNewCard());
     playerValue = calcPlayerHandValue();
     document.getElementById("playerHand").innerHTML = playerHand;
@@ -23,8 +39,14 @@ function hit(){
         document.getElementById("gameUpdate").innerHTML = ("You Bust!");
         document.getElementById("HitBtn").disabled = true;
         document.getElementById("StandBtn").disabled = true;
+        document.getElementById("DoubleBtn").disabled = true;
+        document.getElementById("NewHandBtn").disabled = false;
+        playerScore--;
         playerScore--;
         document.getElementById("playerScore").innerHTML = playerScore;
+    } else {
+        double = true;
+        stand();
     }
 }
 
@@ -120,6 +142,7 @@ function stand(){
     document.getElementById("playerValue").innerHTML = playerValue;
     document.getElementById("HitBtn").disabled = true;
     document.getElementById("StandBtn").disabled = true;
+    document.getElementById("DoubleBtn").disabled = true;
     dealerTurn();
 }
 
@@ -145,16 +168,27 @@ function getHandResults(){
         }
         if(playerValue > dealerValue || dealerValue > 21){
             document.getElementById("gameUpdate").innerHTML = ("You Win!");
-            playerScore++;
+            if(double == true){
+                playerScore++;
+                playerScore++;
+            } else {
+                playerScore++;
+            }
         }
         if(playerValue < dealerValue && dealerValue <= 21){
             document.getElementById("gameUpdate").innerHTML = ("Sorry, you lost!");
-            playerScore--;
+            if(double == true){
+                playerScore--;
+                playerScore--;
+            } else {
+                playerScore--;
+            }
         }
     }
     document.getElementById("playerScore").innerHTML = playerScore;
     document.getElementById("dealerHand").innerHTML = dealerHand;
     document.getElementById("dealerValue").innerHTML = dealerValue;
+    document.getElementById("NewHandBtn").disabled = false;
 }
 
 function clearHand(){
@@ -165,6 +199,7 @@ function clearHand(){
 }
 
 function newHand(){
+    double = false;
     playerAce = false;
     dealerAce = false;
     dealerHand.push(dealNewCard());
@@ -180,14 +215,16 @@ function newHand(){
 }
 
 function init(){
-newHand();
-playerScore = 0;
-document.getElementById("playerScore").innerHTML = playerScore;
+    newHand();
+    playerScore = 0;
+    document.getElementById("playerScore").innerHTML = playerScore;
+    document.getElementById("NewHandBtn").disabled = true;
 }
 
 function reset(){
     document.getElementById("HitBtn").disabled = false;
     document.getElementById("StandBtn").disabled = false;
+    document.getElementById("DoubleBtn").disabled = false;
     document.getElementById("gameUpdate").innerHTML = ("Hand Status");
     clearHand();
     newHand();
@@ -198,8 +235,10 @@ function reset(){
 function newDeal(){
     document.getElementById("HitBtn").disabled = false;
     document.getElementById("StandBtn").disabled = false;
+    document.getElementById("DoubleBtn").disabled = false;
     document.getElementById("gameUpdate").innerHTML = ("Hand Status");
     clearHand();
     newHand();
+    document.getElementById("NewHandBtn").disabled = true;
 }
 

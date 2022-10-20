@@ -17,6 +17,14 @@
     margin-right: auto;
 }
 
+.gameRow{
+    display: flex;
+}
+
+.gameColumn {
+    flex: 50%;
+}
+
 #HitBtn{
     background-color: lightseagreen;
     font-weight: bold;
@@ -34,5 +42,10 @@
 
 #ResetBtn{
     background-color: lightcoral;
+    font-weight: bold;
+}
+
+#DoubleBtn{
+    background-color: lightblue;
     font-weight: bold;
 }

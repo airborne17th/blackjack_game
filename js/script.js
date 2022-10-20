@@ -25,6 +25,7 @@ function hit(){
         document.getElementById("HitBtn").disabled = true;
         document.getElementById("StandBtn").disabled = true;
         document.getElementById("DoubleBtn").disabled = true;
+        document.getElementById("NewHandBtn").disabled = false;
         playerScore--;
         document.getElementById("playerScore").innerHTML = playerScore;
     }
